@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy Birthday 💗</title>
+    <link rel="icon" type="image/png" href="cake.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --blush: #fff0f6;
+        --petal: #ffd6e7;
+        --bubblegum: #ff9ec7;
+        --rose: #ff6fa8;
+        --berry: #c2417a;
+        --cream: #fffafc;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        font-family: "Quicksand", "Trebuchet MS", sans-serif;
+        color: var(--berry);
+        background:
+          radial-gradient(circle at 15% 20%, #ffe3ef 0, transparent 40%),
+          radial-gradient(circle at 85% 80%, #ffcfe3 0, transparent 45%),
+          var(--blush);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        text-align: center;
+        padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+      }
+      /* floating background hearts */
+      .bg-heart {
+        position: fixed;
+        bottom: -40px;
+        opacity: 0.55;
+        pointer-events: none;
+        animation: floatUp linear infinite;
+      }
+      @keyframes floatUp {
+        to {
+          transform: translateY(-115vh) rotate(25deg);
+          opacity: 0;
+        }
+      }
+
+      main {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 460px;
+      }
+      h1 {
+        font-family: "Pacifico", cursive;
+        font-weight: 400;
+        font-size: clamp(2.4rem, 10vw, 3.6rem);
+        line-height: 1.15;
+        color: var(--rose);
+        text-shadow:
+          0 0 18px rgba(255, 111, 168, 0.45),
+          3px 3px 0 #fff;
+        margin-bottom: 1.4rem;
+      }
+      .hint {
+        margin-top: 1rem;
+        font-weight: 700;
+        color: var(--bubblegum);
+        transition: opacity 0.4s;
+      }
+
+      /* envelope button */
+      .envelope {
+        all: unset;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+        position: relative;
+        width: 220px;
+        height: 150px;
+        filter: drop-shadow(0 0 16px rgba(255, 111, 168, 0.45));
+        animation: bob 2.4s ease-in-out infinite;
+        transition: transform 0.3s;
+      }
+      .envelope:focus-visible {
+        outline: 3px dashed var(--rose);
+        outline-offset: 10px;
+        border-radius: 16px;
+      }
+      .envelope:hover {
+        transform: scale(1.05);
+      }
+      @keyframes bob {
+        50% {
+          translate: 0 -8px;
+        }
+      }
+      .env-body {
+        position: absolute;
+        inset: 0;
+        border-radius: 14px;
+        background: linear-gradient(160deg, #ffc2da, #ff9ec7);
+        border: 4px solid #fff;
+        box-shadow: inset 0 0 0 3px var(--rose);
+      }
+      .env-flap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 80px;
+        background: linear-gradient(#ffb3d1, #ff8fbd);
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        border-radius: 14px 14px 0 0;
+      }
+      .env-heart {
+        position: absolute;
+        left: 50%;
+        top: 58px;
+        translate: -50% 0;
+        font-size: 2rem;
+        z-index: 2;
+        animation: beat 1.2s ease-in-out infinite;
+      }
+      @keyframes beat {
+        50% {
+          scale: 1.2;
+        }
+      }
+      .envelope.gone {
+        display: none;
+      }
+
+      /* the letter */
+      .letter {
+        display: none;
+        position: relative;
+        background: var(--cream);
+        border: 5px solid #fff;
+        border-radius: 26px;
+        outline: 4px dashed var(--bubblegum);
+        outline-offset: -14px;
+        padding: 2.4rem 1.8rem;
+        box-shadow:
+          0 0 0 4px var(--petal),
+          0 0 40px rgba(255, 111, 168, 0.5);
+        font-size: 1.15rem;
+        line-height: 1.7;
+        font-weight: 500;
+      }
+      .letter.open {
+        display: block;
+        animation: pop 0.7s cubic-bezier(0.2, 1.4, 0.4, 1);
+      }
+      @keyframes pop {
+        from {
+          transform: scale(0.3) rotate(-8deg);
+          opacity: 0;
+        }
+      }
+      .letter h2 {
+        font-family: "Pacifico", cursive;
+        font-weight: 400;
+        font-size: 1.8rem;
+        color: var(--rose);
+        margin-bottom: 0.8rem;
+      }
+      .letter p + p {
+        margin-top: 0.8rem;
+      }
+      .replay {
+        all: unset;
+        cursor: pointer;
+        margin-top: 1.4rem;
+        padding: 0.55rem 1.3rem;
+        background: var(--petal);
+        border: 3px solid #fff;
+        border-radius: 999px;
+        font-weight: 700;
+        color: var(--berry);
+        box-shadow: 0 0 0 2px var(--bubblegum);
+      }
+      .replay:hover {
+        background: var(--bubblegum);
+        color: #fff;
+      }
+      .replay:focus-visible {
+        outline: 3px dashed var(--rose);
+        outline-offset: 4px;
+      }
+
+      canvas#confetti {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .envelope,
+        .env-heart,
+        .bg-heart {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="confetti"></canvas>
+
+    <main>
+      <h1 id="title">Happy Birthday</h1>
+
+      <button
+        class="envelope"
+        id="envelope"
+        aria-label="Open your birthday letter"
+      >
+        <span class="env-body"></span>
+        <span class="env-flap"></span>
+        <span class="env-heart">💌</span>
+      </button>
+      <p class="hint" id="hint">tap the letter ✨</p>
+
+      <section class="letter" id="letter" aria-live="polite">
+        <h2>Happy Birthday! 🐱 🎀</h2>
+        <p>
+          Today is all about celebrating YOU! I hope your day is filled with
+          sweet treats, endless smiles, and all your favorite things.
+        </p>
+        <p>Thank you for being such a wonderful friend! 💗 🎂</p>
+        <button class="replay" id="replay">more confetti 🎉</button>
+      </section>
+    </main>
+
+    <!-- OPTIONAL: put your own song next to this file and name it birthday.mp3.
+     If the file is missing, a cute built-in "Happy Birthday" tune plays instead. -->
+    <audio id="song" src="birthday.mp3" preload="auto" loop></audio>
+
+    <script>
+      /* ---------- floating hearts in the background ---------- */
+      const symbols = ["💗", "🎀", "🌸", "💖", "✨"];
+      for (let i = 0; i < 14; i++) {
+        const h = document.createElement("span");
+        h.className = "bg-heart";
+        h.textContent = symbols[i % symbols.length];
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = 16 + Math.random() * 22 + "px";
+        h.style.animationDuration = 9 + Math.random() * 10 + "s";
+        h.style.animationDelay = -Math.random() * 15 + "s";
+        document.body.appendChild(h);
+      }
+
+      /* ---------- confetti ---------- */
+      const canvas = document.getElementById("confetti");
+      const ctx = canvas.getContext("2d");
+      let pieces = [],
+        raf = null;
+      const colors = [
+        "#ff6fa8",
+        "#ff9ec7",
+        "#ffd6e7",
+        "#ffe066",
+        "#9be7ff",
+        "#c9a7ff",
+        "#a8f0c6",
+        "#ffffff",
+      ];
+
+      function resize() {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+      }
+      addEventListener("resize", resize);
+      resize();
+
+      function burst(count = 160) {
+        for (let i = 0; i < count; i++) {
+          const fromLeft = i % 2 === 0;
+          pieces.push({
+            x: fromLeft ? 0 : canvas.width,
+            y: canvas.height * 0.55,
+            vx: (fromLeft ? 1 : -1) * (4 + Math.random() * 9),
+            vy: -(8 + Math.random() * 12),
+            size: 6 + Math.random() * 7,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rot: Math.random() * Math.PI,
+            vr: (Math.random() - 0.5) * 0.3,
+            shape: Math.random() < 0.3 ? "circle" : "rect",
+            life: 0,
+          });
+        }
+        if (!raf) loop();
+      }
+      function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach((p) => {
+          p.vy += 0.25;
+          p.vx *= 0.99;
+          p.vy *= 0.995;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rot += p.vr;
+          p.life++;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          if (p.shape === "circle") {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.size / 2, 0, 6.3);
+            ctx.fill();
+          } else ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+          ctx.restore();
+        });
+        pieces = pieces.filter((p) => p.y < canvas.height + 30);
+        if (pieces.length) raf = requestAnimationFrame(loop);
+        else {
+          raf = null;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+      // gentle rain of confetti from the top too
+      function rain(seconds = 5) {
+        const end = Date.now() + seconds * 1000;
+        (function drop() {
+          for (let i = 0; i < 4; i++)
+            pieces.push({
+              x: Math.random() * canvas.width,
+              y: -10,
+              vx: (Math.random() - 0.5) * 2,
+              vy: 1 + Math.random() * 3,
+              size: 6 + Math.random() * 6,
+              color: colors[Math.floor(Math.random() * colors.length)],
+              rot: Math.random() * 3,
+              vr: (Math.random() - 0.5) * 0.2,
+              shape: Math.random() < 0.3 ? "circle" : "rect",
+              life: 0,
+            });
+          if (!raf) loop();
+          if (Date.now() < end) setTimeout(drop, 80);
+        })();
+      }
+
+      /* ---------- music ---------- */
+      const song = document.getElementById("song");
+      let audioCtx = null,
+        synthTimer = null,
+        usingFile = true;
+      song.addEventListener("error", () => {
+        usingFile = false;
+      });
+
+      // "Happy Birthday" as [midi note, beats]
+      const tune = [
+        [67, 0.75],
+        [67, 0.25],
+        [69, 1],
+        [67, 1],
+        [72, 1],
+        [71, 2],
+        [67, 0.75],
+        [67, 0.25],
+        [69, 1],
+        [67, 1],
+        [74, 1],
+        [72, 2],
+        [67, 0.75],
+        [67, 0.25],
+        [79, 1],
+        [76, 1],
+        [72, 1],
+        [71, 1],
+        [69, 1],
+        [77, 0.75],
+        [77, 0.25],
+        [76, 1],
+        [72, 1],
+        [74, 1],
+        [72, 2],
+      ];
+      function playSynth() {
+        audioCtx =
+          audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        const beat = 0.42;
+        let t = audioCtx.currentTime + 0.1;
+        tune.forEach(([note, beats]) => {
+          const f = 440 * Math.pow(2, (note - 69) / 12);
+          const o = audioCtx.createOscillator(),
+            g = audioCtx.createGain();
+          o.type = "triangle";
+          o.frequency.value = f;
+          // tiny "meow" glide at the start of each note
+          o.frequency.setValueAtTime(f * 1.06, t);
+          o.frequency.exponentialRampToValueAtTime(f, t + 0.08);
+          g.gain.setValueAtTime(0, t);
+          g.gain.linearRampToValueAtTime(0.25, t + 0.03);
+          g.gain.exponentialRampToValueAtTime(0.001, t + beats * beat);
+          o.connect(g).connect(audioCtx.destination);
+          o.start(t);
+          o.stop(t + beats * beat + 0.05);
+          t += beats * beat;
+        });
+        const total = (t - audioCtx.currentTime) * 1000;
+        synthTimer = setTimeout(playSynth, total + 800); // loop
+      }
+      function startMusic() {
+        stopMusic();
+        if (usingFile) {
+          song.currentTime = 0;
+          song.play().catch(() => {
+            usingFile = false;
+            playSynth();
+          });
+        } else playSynth();
+      }
+      function stopMusic() {
+        song.pause();
+        clearTimeout(synthTimer);
+      }
+
+      /* ---------- open the letter ---------- */
+      const envelope = document.getElementById("envelope");
+      const letter = document.getElementById("letter");
+      const hint = document.getElementById("hint");
+      const title = document.getElementById("title");
+
+      envelope.addEventListener("click", () => {
+        envelope.classList.add("gone");
+        hint.style.display = "none";
+        title.style.fontSize = "clamp(1.8rem, 7vw, 2.6rem)";
+        letter.classList.add("open");
+        burst();
+        rain();
+        setTimeout(() => burst(100), 700);
+        startMusic(); // runs inside the click, so browsers allow sound
+      });
+      document.getElementById("replay").addEventListener("click", () => {
+        burst();
+        rain(3);
+      });
+    </script>
+  </body>
+</html>
